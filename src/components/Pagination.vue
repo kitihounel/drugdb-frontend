@@ -58,7 +58,8 @@ export default defineComponent({
   props: {
     lastPage: {
       type: Number,
-      required: true
+      required: true,
+      default: 1
     }
   },
 

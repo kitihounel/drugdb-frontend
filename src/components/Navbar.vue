@@ -13,7 +13,7 @@
         <span class="navbar-item has-text-white">
           |
         </span>
-        <span class="navbar-item has-text-white has-text-weight-bold">
+        <span class="navbar-item has-text-white">
           <router-link to="/">Home</router-link>
         </span>
       </div>
