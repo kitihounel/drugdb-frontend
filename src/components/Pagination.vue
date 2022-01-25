@@ -2,48 +2,49 @@
   <nav class="pagination is-right">
     <ul class="pagination-list">
       <li>
-        <a  class="pagination-link has-text-white has-background-primary-dark"
-            @click="onFirst"
-            :disabled="page == 1">
+        <button class="button is-outlined is-link is-light pagination-link has-text-weight-bold"
+                @click="onFirst"
+                :disabled="onFirstPage">
           <span>&lt;&lt;</span>
-        </a>
+        </button>
       </li>
 
       <li>
-        <a  class="pagination-link has-text-white has-background-link-dark"
-            @click="onPrevious"
-            :disabled="page == 1">
+        <button class="button is-outlined is-link is-light pagination-link has-text-weight-bold"
+                @click="onPrevious"
+                :disabled="onFirstPage">
           <span>&lt;</span>
-        </a>
+        </button>
       </li>
 
       <li>
-        <input  class="input is-normal"
+        <input  class="input is-normal is-link"
                 step="1"
                 type="number"
                 min="1"
+                ref="input"
+                v-model="page"
                 :max="lastPage"
-                @keydown.enter="onInput"
-                ref="input">
+                @keydown.enter="onInput">
       </li>
 
       <li class="has-text-weight-bold px-2">/ {{ lastPage }}</li>
 
       <li>
-        <a  class="pagination-link has-text-white has-background-link-dark"
-            @click="onNext"
-            :disabled="page == lastPage">
+        <button class="button is-outlined is-link is-light pagination-link has-text-weight-bold"
+                @click="onNext"
+                :disabled="onLastPage">
           <span>&gt;</span>
-        </a>
+        </button>
       </li>
 
       <li>
-        <a  class="pagination-link has-text-white has-background-primary-dark"
-            aria-label="Goto last page"
-            @click="onLast"
-            :disabled="page == lastPage">
+        <button class="button is-outlined is-link is-light pagination-link has-text-weight-bold"
+                aria-label="Goto last page"
+                @click="onLast"
+                :disabled="onLastPage">
           <span>&gt;&gt;</span>
-        </a>
+        </button>
       </li>
     </ul>
   </nav>
@@ -54,9 +55,14 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
   name: 'Pagination',
-  props: ['lastPage'],
+  props: {
+    lastPage: {
+      type: Number,
+      required: true
+    }
+  },
 
-  data: function() {
+  data() {
     return {
       page: 1
     }
@@ -85,18 +91,27 @@ export default defineComponent({
 
     onInput() {
       const el = this.$refs.input as HTMLInputElement
-      console.log(el.value)
       if (!el.validity.valid)
-        return
-      const value = parseInt(el.value)
-      if (isNaN(value)) {
-        this.page = value
-        this.emitPageChangeEvent()
+        this.page = 1
+      else {
+        const n = parseInt(el.value)
+        this.page = isNaN(n) || n < 1 || n > this.lastPage ? 1 : n
       }
+      this.emitPageChangeEvent()
     },
 
     emitPageChangeEvent() {
       this.$emit('page-changed', this.page)
+    }
+  },
+
+  computed: {
+    onFirstPage() {
+      return this.page == 1
+    },
+
+    onLastPage() {
+      return this.page == this.lastPage
     }
   }
 })
