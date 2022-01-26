@@ -33,8 +33,15 @@ export default defineComponent({
     }
   },
 
-  mounted: function() {
-    console.log('mounted')
+  activated: function() {
+    const q = this.$route.query.q
+    if (q && typeof q == 'string') {
+      const trimmed = q.trim()
+      if (trimmed !== this.term) {
+        this.term = trimmed
+        this.$emit('search', trimmed)
+      }
+    }
   },
 
   methods: {

@@ -22,7 +22,7 @@
         <tr>
           <td>
             <p v-for="item in innItems" :key="item.index" class="mb-2">
-              <span class="is-link" @click="search(item.value)">
+              <span class="has-text-link search-link" @click="search(item.value)">
                 {{ item.value }}
               </span>
             </p>
@@ -160,5 +160,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+span.search-link {
+  cursor: pointer;
+}
 </style>
