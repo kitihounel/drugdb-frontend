@@ -13,10 +13,16 @@
         <span class="navbar-item has-text-white">
           |
         </span>
-        <span class="navbar-item has-text-white">
+        <span class="navbar-item has-text-white has-text-weight-bold">
           <router-link to="/">Home</router-link>
         </span>
       </div>
     </div>
   </nav>
 </template>
+
+<style>
+nav span a {
+  color: #fff;
+}
+</style>

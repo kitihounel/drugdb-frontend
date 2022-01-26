@@ -5,7 +5,10 @@
         <input  autofocus
                 class="input"
                 type="text"
-                placeholder="Type here..." ref="input"
+                placeholder="Type here..."
+                autocomplete="off"
+                spellcheck="false"
+                ref="input"
                 v-model="term"
                 @keydown.enter="onSubmit">
       </div>
@@ -28,6 +31,10 @@ export default defineComponent({
     return {
       term: ''
     }
+  },
+
+  mounted: function() {
+    console.log('mounted')
   },
 
   methods: {

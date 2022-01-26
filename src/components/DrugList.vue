@@ -1,10 +1,14 @@
 <template>
   <div>
-    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <table class="table is-striped is-hoverable is-fullwidth">
       <tbody>
-        <tr v-for="drug in drugs">
+        <tr v-for="index in drugs.length" :key="index">
           <td>
-            <span class="is-link">{{ drug.name }}</span>
+            <span class="is-link">
+              <router-link :to="{ name: 'DrugPage', params: { drugId: drugs[index - 1].id } }">
+                {{ drugs[index - 1].name }}
+              </router-link>
+            </span>
           </td>
         </tr>
       </tbody>
@@ -23,6 +27,9 @@ export default defineComponent({
       type: Array as PropType<Drug[]>,
       required: true
     }
+  },
+  computed: {
+    
   }
 })
 </script>
