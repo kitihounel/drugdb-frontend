@@ -168,7 +168,8 @@ export default defineComponent({
 
   mounted: function () {
     const drugId = this.$route.params.drugId
-    const url = `${apiUrl}/drugs/${drugId}`
+    const baseApiUrl = process.env.VUE_APP_API_URL
+    const url = `${baseApiUrl}/drugs/${drugId}`
     fetch(url, { method: 'get' })
       .then((response) => {
         if (!response.ok) {

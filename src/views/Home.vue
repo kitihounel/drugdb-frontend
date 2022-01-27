@@ -75,7 +75,8 @@ export default defineComponent({
     },
 
     makeFetchRequest(page = 1) {
-      const url = new URL(`${apiUrl}/search`)
+      const baseApiUrl = process.env.VUE_APP_API_URL
+      const url = new URL(`${baseApiUrl}/search`)
       url.searchParams.append('query', this.query)
       url.searchParams.append('page', page.toString())
       fetch(url.toString(), { method: 'get' })
