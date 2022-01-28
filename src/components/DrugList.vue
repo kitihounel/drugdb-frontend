@@ -27,9 +27,6 @@ export default defineComponent({
       type: Array as PropType<Drug[]>,
       required: true
     }
-  },
-  computed: {
-    
   }
 })
 </script>

@@ -121,7 +121,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { apiUrl } from '@/env'
+import { apiBaseUrl } from '@/env'
 import Drug from '@/typings/drug'
 import Spinner from '@/components/Spinner.vue'
 
@@ -168,8 +168,7 @@ export default defineComponent({
 
   mounted: function () {
     const drugId = this.$route.params.drugId
-    const baseApiUrl = process.env.VUE_APP_API_URL
-    const url = `${baseApiUrl}/drugs/${drugId}`
+    const url = `${apiBaseUrl}/drugs/${drugId}`
     fetch(url, { method: 'get' })
       .then((response) => {
         if (!response.ok) {

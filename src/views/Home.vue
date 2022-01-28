@@ -35,7 +35,7 @@ import { defineComponent } from 'vue'
 import SearchBar from '@/components/SearchBar.vue'
 import Pagination from '@/components/Pagination.vue'
 import DrugList from '@/components/DrugList.vue'
-import { apiUrl } from '@/env'
+import { apiBaseUrl } from '@/env'
 
 interface CompData {
   drugs: any[]
@@ -75,8 +75,7 @@ export default defineComponent({
     },
 
     makeFetchRequest(page = 1) {
-      const baseApiUrl = process.env.VUE_APP_API_URL
-      const url = new URL(`${baseApiUrl}/search`)
+      const url = new URL(`${apiBaseUrl}/search`)
       url.searchParams.append('query', this.query)
       url.searchParams.append('page', page.toString())
       fetch(url.toString(), { method: 'get' })
